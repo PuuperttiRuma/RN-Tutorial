@@ -18,14 +18,17 @@ const generateRandomBetween = (min, max, exclude) => {
 const GameScreen = props => {
   const [currentGuess, setCurrentGuess] = 
     useState(generateRandomBetween(1, 100, props.userChoice));
+  const [rounds, setRounds] = useState(0);
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
 
+  const { userChoice, onGameOver } = props;
+
   useEffect(() => {
     if (currentGuess === props.userChoice){
-      
+      props.onGameOver(rounds);
     }
-  });
+  }, [currentGuess, userChoice, onGameOver]);
 
   const nextGuessHandler = direction => {
     if (direction === 'lower' && currentGuess < props.userChoice 
@@ -42,6 +45,7 @@ const GameScreen = props => {
     }
     const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);    
     setCurrentGuess(nextNumber);
+    setRounds(rounds => rounds + 1);
   }
 
   return (
