@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, ScrollView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Alert, ScrollView, FlatList, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Card from '../components/Card';
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: Dimensions.get('window').height > 600 ? 20 : 7,
     width: 300,
     maxWidth: '80%'
   },
   listContainer: {
     flex: 1,
-    width: '60%',
+    width: Dimensions.get('window').width > 500 ? '60%' : '80%',
   },
   list: {
     flexGrow: 1,
